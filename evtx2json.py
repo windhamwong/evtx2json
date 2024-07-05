@@ -85,7 +85,7 @@ def remove_namespace(tree):
     :return: xml ElementTree Element with namespace removed
     """
     # Remove namespace
-    for element in tree.getiterator():
+    for element in tree.iter():
         try:
             if element.tag.startswith('{'):
                 element.tag = element.tag.split('}')[1]
@@ -106,6 +106,9 @@ def xml2json(xml_str):
         obj = bf.data(tree)
     except:
         logger.error("Failed to convert XML to JSON for %s" % xml_str)
+        import traceback
+        traceback.print_exc()
+        exit()
     else:
         return obj
 
